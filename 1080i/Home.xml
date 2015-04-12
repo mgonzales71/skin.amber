@@ -30,6 +30,7 @@
       <width>1920</width>
       <height>1080</height>
     </control>
+	
     <control type="group" description="Content">
       <!--<include>OpenClose</include>-->
       <animation effect="fade" start="0" end="100" time="1000" condition="Window.Previous(Startup.xml)">Conditional</animation>
@@ -37,21 +38,24 @@
       <include condition="Skin.HasSetting(VerticalHome)">Vertical_Home_Layout</include>
       <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Home_Layout</include>
       <control type="group" description="RSS">
-        <visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
+        
+		
+		<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
         <control type="image">
           <visible>!Skin.HasSetting(VerticalHome)</visible>
           <posx>0</posx>
-          <posy>990</posy>
-          <width>590</width>
-          <height>90</height>
-          <texture flipx="true" border="100,0,0,0">common/TimePanel.png</texture>
+          <posy>905</posy>
+          <width>2200</width>
+          <height>160</height>
+          <texture flipx="true">common/TimePanel.png</texture>
         </control>
+
         <control type="rss" description="RSS Feed">
           <posx>21</posx>
-          <posy>1044</posy>
-          <width>480</width>
-          <height>90</height>
-          <font>rss</font>
+          <posy>1000</posy>
+          <width>1200</width>
+          <height>128</height>
+          <font>bold40</font>
           <urlset>1</urlset>
           <shadowcolor>ShadowDark</shadowcolor>
           <titlecolor>White2</titlecolor>
@@ -59,73 +63,67 @@
           <textcolor>Grey</textcolor>
         </control>
       </control>
+	  
       <control type="group" description="Weather on Horizontal home screen">
-        <visible>!IsEmpty(Weather.Plugin) + !Skin.HasSetting(VerticalHome) + Container(300).HasFocus(15)</visible>
+        <visible>!IsEmpty(Weather.Plugin) + !Skin.HasSetting(VerticalHome)</visible>
         <include>WeatherAni0</include>
-        <control type="image">
-          <description>Weather image</description>
+		
+		<control type="image">
           <posx>0</posx>
-          <posy>0</posy>
-          <width>80</width>
-          <height>80</height>
-          <aspectratio>keep</aspectratio>
+          <posy>905</posy>
+          <width>2200</width>
+          <height>160</height>
+          <texture flipx="true">common/TimePanel.png</texture>
+		  <visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
+        </control>
+		
+		MainMenu
+		
+ 
+
+			<!--Current Conditions-->
+			<control type="label">
+                    <width>300</width>
+                    <height>128</height>
+					<posx>1348</posx>
+                    <posy>967</posy>
+					<font>WeatherTitle</font>
+					<textcolor>white</textcolor>
+					<align>center</align>
+					<label>$INFO[Window(Weather).Property(Current.Condition)]</label>
+                    <visible>Weather.IsFetched</visible>
+					<shadowcolor>black</shadowcolor>
+            </control>
+		
+		<control type="image">
+          <description>Weather image</description>
+          <posx>1650</posx>
+          <posy>952</posy>
+          <width>128</width>
+          <height>128</height>
+          <aspectratio align="center" aligny="bottom">keep</aspectratio>
           <texture>$INFO[Weather.Conditions]</texture>
         </control>
-        <control type="label">
-          <description>location label</description>
-          <posx>85</posx>
-          <posy>10</posy>
-          <width>500</width>
-          <height>10</height>
-          <align>left</align>
-          <aligny>center</aligny>
-          <font>RSS</font>
-          <textcolor>Highlight</textcolor>
-          <shadowcolor>black</shadowcolor>
-          <label>$INFO[Window(Weather).Property(Location)]</label>
+		
+				<control type="label">
+                <!--Current Temp-->
+                <width>128</width>
+                <height>128</height>
+                <posx>1778</posx>
+                <posy>967</posy>
+                <font>WeatherTitle</font>
+                <textcolor>white</textcolor>
+                <align>center</align>
+                <label>$INFO[Window(Weather).Property(Current.Temperature)] $INFO[System.TemperatureUnits]</label>
+                <visible>Weather.IsFetched</visible>
+				<shadowcolor>black</shadowcolor>
         </control>
-        <control type="grouplist">
-          <posx>85</posx>
-          <posy>40</posy>
-          <width>1000</width>
-          <height>30</height>
-          <orientation>horizontal</orientation>
-          <align>left</align>
-          <itemgap>0</itemgap>
-          <control type="label">
-            <description>Temp label</description>
-            <width min="0" max="300">auto</width>
-            <height>20</height>
-            <align>left</align>
-            <aligny>center</aligny>
-            <font>details</font>
-            <textcolor>white</textcolor>
-            <shadowcolor>black</shadowcolor>
-            <label>[B]$INFO[Window(Weather).Property(Current.Temperature)][/B]</label>
-          </control>
-          <control type="label">
-            <description>Temp Units</description>
-            <width min="0" max="100">auto</width>
-            <height>15</height>
-            <font>rss</font>
-            <aligny>center</aligny>
-            <label>$INFO[System.TemperatureUnits]</label>
-            <textcolor>white</textcolor>
-            <shadowcolor>black</shadowcolor>
-            <visible>!IsEmpty(Window(Weather).Property(Current.Temperature))</visible>
-          </control>
-          <control type="label">
-            <description>Conditions Label</description>
-            <width>500</width>
-            <height>22</height>
-            <font>font10</font>
-            <aligny>center</aligny>
-            <label>$INFO[Window(Weather).Property(Current.Condition),  ]</label>
-            <textcolor>grey2</textcolor>
-            <shadowcolor>black</shadowcolor>
-          </control>
+   
+   		
+		
         </control>
-      </control>
+	  
+	  
       <control type="group" description="Weather Info">
         <posx>1500</posx>
         <posy>60</posy>
